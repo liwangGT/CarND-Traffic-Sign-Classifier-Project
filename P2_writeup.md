@@ -28,6 +28,11 @@ The training, test, and validation data distribution plot
 The training and testing accuracy plot (with respect to training data)
 ![accuracy plot][img2]
 
+initial testing accuracy is:
+Model saved
+INFO:tensorflow:Restoring parameters from ./CNNmodel
+Test Accuracy = 0.883
+
 1. Extract sequence of images from a video using moviepy, and apply a process_image function to modify each frame of image.
 
 2. Take the color iamge and convert it to grayscale.
