@@ -11,7 +11,8 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 
 [image1]: ./examples/grayscale.jpg "Grayscale"
-[img1]: ./images/accuracy_origin_bar.png "bar plot"
+[img1]: ./images/relative_data.png "bar plot1"
+[img2]: ./images/accuracy_origin_bar.png "bar plot2"
 
 ---
 
@@ -20,7 +21,12 @@ The goals / steps of this project are the following:
 ### 1. Pipeline of lane lines detection from a video
 
 My pipeline for detecting lane line consists of the following steps. Note that the steps for lane lines detection from an image just skips step 1. see here 
-![alt text][img1]
+
+The training, test, and validation data distribution plot
+![data distribution][img1]
+
+The training and testing accuracy plot (with respect to training data)
+![accuracy plot][img2]
 
 1. Extract sequence of images from a video using moviepy, and apply a process_image function to modify each frame of image.
 
