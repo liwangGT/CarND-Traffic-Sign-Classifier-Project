@@ -27,10 +27,6 @@ The goals / steps of this project are the following:
 [image10]: ./images/webdata.png "webdata"
 [image11]: ./images/accuracy_after.png "accafter"
 
-
-## Rubric Points
-### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
-
 ---
 ### Data Set Summary & Exploration
 
