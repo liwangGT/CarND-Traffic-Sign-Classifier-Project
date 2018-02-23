@@ -98,7 +98,7 @@ My final model consisted of the following layers:
 | RELU					| introduce nonlinearity	    				|
 | Max pooling	      	| 2x2 stride,  outputs 14x14x12 				|
 | Convolution 5x5	    | 1x1 stride, valid padding, outputs 10x10x32	|
-| RELU                  |                                               |
+| RELU                  |  introduce nonlinearity                   |
 | Max pooling           | 2x2 stride,  outputs 5x5x32                   |
 | Flatten               | output 800                                    |
 | Dropout               | keep probability = 0.8                        |
@@ -129,17 +129,17 @@ My final model results were:
 * validation set accuracy of 0.942
 * test set accuracy of 0.933
 
+The approach used for finding an appropriate CNN structure is an iterative approach.
+* The first architecture tried is the LeNet CNN model. The reason is that similar problem of classifying digits in images is considered. Conversion to grayscale image and normalization of pixel values were performed to gain faster and more accurate result. After tuning different hyperparameters, the final validation accuracy was about 0.895. 
+* Since the distribution of training data is not uniform across all traffic signs. We find that the prediction accuracy for certain traffic signs are relatively low. Data augmentation approach were taken to augment the traffic sign training data with insufficient data set. The validataion accuracy increased to 0.910.
+* It is further observed that Lenet has 10 outputs while traffic sign CNN has 43 outputs. Thus, the current number of features might be insufficient to reach a good final prediction. The last hidden layer  Add more neurons in each layer
+* Detect overfitt to training data, dropout
 If an iterative approach was chosen:
 * What was the first architecture that was tried and why was it chosen?
 * What were some problems with the initial architecture?
 * How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to overfitting or underfitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
 * Which parameters were tuned? How were they adjusted and why?
 * What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
-
-If a well known architecture was chosen:
-* What architecture was chosen?
-* Why did you believe it would be relevant to the traffic sign application?
-* How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
  
 dropout, when best is still not enough
 200 to 43 as last layer
