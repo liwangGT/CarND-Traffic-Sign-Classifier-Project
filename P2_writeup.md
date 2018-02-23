@@ -20,6 +20,12 @@ The goals / steps of this project are the following:
 [image3]: ./images/data_augment.png "accuracy plot"
 [image4]: ./images/layer_visual.png "layer plot"
 [image5]: ./images/relative_data_augment.png "relative augment"
+[image6]: ./images/hiddenlayer1.png "hidden1"
+[image7]: ./images/hiddenlayer2.png "hidden2"
+[image8]: ./images/augment.png "augment"
+[image9]: ./images/refdata.png "refdata"
+[image10]: ./images/webdata.png "webdata"
+[image11]: ./images/accuracy_after.png "accafter"
 
 
 ## Rubric Points
@@ -42,9 +48,13 @@ The original data set provided by for the project has the following properties.
 
 Here is an exploratory visualization of the data set. It is a bar chart showing how the data are distributed in training, validation, and testing data set. Note that since the magnitue of these three sets of data are different (i.e., 34799:4410:12630), they are all normalized by the maximum number of samples in each catergory. 
 
-![alt text][image1]
+![data distribution][image1]
 
 It can be concluded that the distribution of the training, validation, and testing data sets for each traffic sign is similar. However, some traffic signs have lots of training data, while some have very limited number of data. This will lead to problem of overfitting, and will be addressed in the data preprocessing section.
+
+ref data, random sample and sign number
+
+![sample ref][image9]
 
 ### Design and Test a Model Architecture
 
@@ -58,18 +68,25 @@ When color is considered in the training process, the overall amount of computat
 
 2) Normalization of the image data
 
+When the image data are scaled back into [-1, 1], the learning algorithm is expected to converge much faster. Thus, all training, validation, and testing data are normalized to [-1, 1].
 
-As a last step, I normalized the image data because ...
+3) Augmenting training data
 
-I decided to generate additional data because ... 
+When the original training data is used to train the CNN model, it is observed that signs with insufficient training data are easily misclassified. This fact can be visualized with the following plot. For easier comparison, the numbers of training data for different traffic signs are normalized by the largest number of a single traffic sign. 
 
-To add more data to the the data set, I used the following techniques because ... 
+![accuracy vs. distribution][image2]
 
-Here is an example of an original image and an augmented image:
+It can be observed that low validation accuracy is almost always related to low number of training data. The classification result is biased towards traffic signs with more data. To address this problem, additional training data are generated. 
 
-![alt text][image3]
+![example augment][image8]
 
-The difference between the original data set and the augmented data set is the following ... 
+Training data number, before and after augmentation
+
+![ba augment][image5]
+
+Accuracy after augmentation
+
+![accuracy augment][image11]
 
 
 #### 2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
@@ -119,9 +136,7 @@ If a well known architecture was chosen:
 #### 1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
 Here are five German traffic signs that I found on the web:
-
-![alt text][image4] ![alt text][image5] ![alt text][image6] 
-![alt text][image7] ![alt text][image8]
+![web data][image10]
 
 The first image might be difficult to classify because ...
 
@@ -160,4 +175,5 @@ For the second image ...
 ### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
 #### 1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
 
-
+![hidden1][image6]
+![hidden2][image7]
