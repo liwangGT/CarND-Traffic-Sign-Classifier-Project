@@ -134,15 +134,15 @@ The approach used for finding an appropriate CNN structure is an iterative appro
 * Since the distribution of training data is not uniform across all traffic signs. We find that the prediction accuracy for certain traffic signs are relatively low. Data augmentation approach were taken to augment the traffic sign training data with insufficient data set. The validataion accuracy increased to 0.910.
 * It is further observed that Lenet has 10 outputs while traffic sign CNN has 43 outputs. Thus, the current number of features might be insufficient to reach a good final prediction. The last several hidden layers' neurons were increase from 400x120x43 to 800x200x43. In addition to double the depth of first two convolution layers. With the increase number of neurons and some tuning, the validation accuracy increased to around 0.923.
 * With the improved CNN model, the validation accuracy plateaus at around 0.92. A further investigation discovered that the training accuracy for CNN is already 0.998. Thus we reach the region of overfitting, with not hope for further improvement by simple tunings. To avoid overfitting, a dropout layer is incorperated to make the current model more fault tolerant. After tuning the keep probability for the dropout layer, the CNN model is able to produce validation accuracy of around 0.945.
+* The most important design choices are: augmenting training data, increasing neurons in hidden layers to generate more useful features, and adding dropout layer to address overfitting.
 
 ### Test a Model on New Images
 
-#### 1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
+#### 1. Choose six German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
-Here are five German traffic signs that I found on the web:
+Six German traffic signs are seleted from the website. These traffic signs are then intentionally blurred, tilted, and dimmed to make it difficult to classify. The correct label for reference are found from the signnames.csv. These testing images are shown below.
 ![web data][image10]
 
-The first image might be difficult to classify because ...
 
 #### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
@@ -153,51 +153,34 @@ Here are the results of the prediction:
 | 11 Right-of-way  		| 11 Right-of-way   							| 
 | 9 No passing     		| 9 No passing							        |
 | 18 General caution	| 18 General caution		    				|
-| 23 Slippery road      | Bumpy Road					 				|
-| 25 Road work          | Slippery Road      							|
-| 1 Speed limit (30km/h)| Slippery Road                                 |
-
-The signs are intentionally blurred, tilted, and dimmed to make it difficult to classify.
-
-The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
-
-#### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
-
-The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
+| 23 Slippery road      | 23 Slippery road      		 				|
+| 25 Road work          | 25 Road work     						    	|
+| 1 Speed limit (30km/h)| 1 Speed limit (30km/h)                        |
 
 
+The model was able to correctly predict all 6 out of 6 traffic signs, which gives an accuracy of 100%. Since the sample size is small, it is very close to our test set accuracy of 0.9333. After going back into the testing data set, we found that there are multiple very dark or blurred test images. This might be the reason that our samples from the website is predicted better.
 
+#### 3. Describe how certain the model is when predicting on each of the six new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
-Prediction result is:  TopKV2(values=array([[  1.00000000e+00,   4.02341658e-12,   2.66248396e-15],
-       [  9.99999285e-01,   7.23347227e-07,   5.06225151e-09],
-       [  9.99993443e-01,   6.27002919e-06,   2.49703788e-07],
-       [  9.69835520e-01,   3.01632304e-02,   1.14852389e-06],
-       [  1.00000000e+00,   2.37624054e-09,   1.97957276e-10],
-       [  9.12549853e-01,   8.73557106e-02,   4.60974661e-05]], dtype=float32), indices=array([[11, 30, 20],
-       [ 9, 16, 17],
-       [18, 26, 27],
-       [23, 19, 21],
-       [25, 30, 21],
-       [ 1, 40,  0]], dtype=int32))
+To look at how certain these predictions are, a softmax function is applied to the CNN outputs. The top five probabilities are given below.
+| Image           | Correct Label            |  Top 5   Prediction      | Top 5 Probability              | 
+|:---------------:|:------------------------:|:------------------------:|:------------------------------:|
+|   Right-of-way  | 11                       | [ 11, 30, 20]     |[  1.000,   4.023e-12,   2.66e-15] |
+|   No passing    | 9                        | [ 9, 16, 17 ]     |[  1.000,   7.233e-07,   5.062e-09] |
+|   General caution  | 18                    | [ 18, 26, 27]     |[  1.000,   6.270e-06,   2.497e-07] |
+|   Slippery road  | 23                      | [ 23, 19, 21]     |[  9.698e-01,   3.016e-02,   1.148e-06] |
+|   Road work  | 25                          | [ 25, 30, 21]     |[  9.125e-01,   8.735e-02,   4.609e-05] |
+|   Speed limit (30km/h)  | 1                | [ 1, 40,  0]      |[  1.000,   4.023e-12,   2.66e-15] |
 
+Most images are correctly identified with more than 99.9% confidence. The classifier get a little confused between 1) Slippery road (97%) and dangerous curve to left (3%) 2) Road work (92%) and be aware of ice and snow (8%). More training data can be added to these categories to further improve the prediction accuracy.
 
-
-For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
-
-| Probability         	|     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| .60         			| Stop sign   									| 
-| .20     				| U-turn 										|
-| .05					| Yield											|
-| .04	      			| Bumpy Road					 				|
-| .01				    | Slippery Road      							|
-
-
-
-For the second image ... 
 
 ### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
 #### 1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
 
+To further understand what is happening under the hood. We took a "Right-of-way" traffic sign and feed it into the CNN model. The first layer output (after convolution) is visualized below.
 ![hidden1][image6]
+The second layer output (after convolution) is also visualized below.
 ![hidden2][image7]
+
+It can be observed that the first layer output pick up multiple small features in the image, for example inner boundary, outer boundary, inisde feature, shape of sign, and so on. The second layer took these small features and combine them into higher level features. Since there are 43 difference classes to classify, the difference between them is identified with these high dimensional features.
