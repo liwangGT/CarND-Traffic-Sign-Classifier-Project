@@ -163,7 +163,8 @@ The model was able to correctly predict all 6 out of 6 traffic signs, which give
 #### 3. Describe how certain the model is when predicting on each of the six new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
 To look at how certain these predictions are, a softmax function is applied to the CNN outputs. The top five probabilities are given below.
-| Image           | Correct Label            |  Top 5   Prediction      | Top 5 Probability              | 
+
+| Image           | Correct Label            |  Top 5   Predictions      | Top 5 Probability              | 
 |:---------------:|:------------------------:|:------------------------:|:------------------------------:|
 |   Right-of-way  | 11                       | [ 11, 30, 20]     |[  1.000,   4.023e-12,   2.66e-15] |
 |   No passing    | 9                        | [ 9, 16, 17 ]     |[  1.000,   7.233e-07,   5.062e-09] |
