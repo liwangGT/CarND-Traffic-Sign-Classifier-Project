@@ -58,15 +58,15 @@ In order to better understand the traffic sign data, six random samples from the
 
 For the preprocessing of data, three different techniques are used.
 
-1) RGB to grayscale.
+* RGB to grayscale.
 
 When color is considered in the training process, the overall amount of computation is multiplied by 3 with little improvement to the final result. Here, we argue that color plays smaller role as compared to other features in the image. The RGB images are converted into grayscale images to increase the computation efficiency. This is done by performing a weighted sum of RGB channels ([0.299, 0.587, 0.114]) using the [luminosity method](https://www.tutorialspoint.com/dip/grayscale_to_rgb_conversion.htm). 
 
-2) Normalization of the image data
+* Normalization of the image data
 
 When the image data are scaled back into [-1, 1], the learning algorithm is expected to converge much faster. Thus, all training, validation, and testing data are normalized to [-1, 1].
 
-3) Augmenting training data
+* Augmenting training data
 
 When the original training data is used to train the CNN model, it is observed that signs with insufficient training data are easily misclassified. This fact can be visualized with the following plot. For easier comparison, the numbers of training data for different traffic signs are normalized by the largest number of a single traffic sign. 
 
@@ -112,15 +112,15 @@ My final model consisted of the following layers:
 
 To train the model, I used an Adam gradient descent optimizer with batch size of 100, epoch of 30, learning rate of 0.001, and keep probability of 0.8. The reasons for choosing these options or parameters are described below.
 
-1) Optimizer: There are multiple optimizers to choose from, for example Adam, SGD+Nesterov, and momentum. Since Adam is often recommended as the default algorithm to use, we adopt the AdamOptimizer for our gradient descent algorithm.
+* Optimizer: There are multiple optimizers to choose from, for example Adam, SGD+Nesterov, and momentum. Since Adam is often recommended as the default algorithm to use, we adopt the AdamOptimizer for our gradient descent algorithm.
 
-2) Batch size: Since we can't feed the entire data set into the optimizer at once. The training data are sliced into small batches to feed into the optimizer. As stochastic gradient descent method is used, large batch size will lead to more ignored data sets. On the other, the total optimization time increases significantly if the batch size is too small. The batch size of 100 is chosen as a tradeoff between optimization time and prediction accuracy.
+* Batch size: Since we can't feed the entire data set into the optimizer at once. The training data are sliced into small batches to feed into the optimizer. As stochastic gradient descent method is used, large batch size will lead to more ignored data sets. On the other, the total optimization time increases significantly if the batch size is too small. The batch size of 100 is chosen as a tradeoff between optimization time and prediction accuracy.
 
-3) Epoch: As the available training data set is limited, it might not be sufficient to drive the training parameters to the desired value. To overcome the lack of training data, we can feed the training data into the optimizer multiple times. In each epoch, the training data is shuffled to avoid overfitting. When the epoch number is too large, we will notice that the validaction accuracy starts decline. This is a sign that the model is overfitted to the training data. The epoch number 30 is decided by observing when the model starts to overfit.
+* Epoch: As the available training data set is limited, it might not be sufficient to drive the training parameters to the desired value. To overcome the lack of training data, we can feed the training data into the optimizer multiple times. In each epoch, the training data is shuffled to avoid overfitting. When the epoch number is too large, we will notice that the validaction accuracy starts decline. This is a sign that the model is overfitted to the training data. The epoch number 30 is decided by observing when the model starts to overfit.
 
-4) Learning rate: The learning rate decides the actual stepsize taken for optimization. Small learning rate leads to very slow convergence rate, while large learning rate causes overshoting the desired value. The learning rate 0.001 is determined as a balance between convergence time and training accuracy.
+* Learning rate: The learning rate decides the actual stepsize taken for optimization. Small learning rate leads to very slow convergence rate, while large learning rate causes overshoting the desired value. The learning rate 0.001 is determined as a balance between convergence time and training accuracy.
 
-5) Keep-prob: During the training process, it can be observed that sometimes the training accuracy is close to 100% while the validation accuracy is very low. This is a sign that the CNN model is overfitted to the training data. To avoid overfitting, multiple techniques such as dropout and regularization can be leaveraged. Here we choose dropout with keep probability of 0.8 to reach a balance between overfitting and underfitting.
+* Keep-prob: During the training process, it can be observed that sometimes the training accuracy is close to 100% while the validation accuracy is very low. This is a sign that the CNN model is overfitted to the training data. To avoid overfitting, multiple techniques such as dropout and regularization can be leaveraged. Here we choose dropout with keep probability of 0.8 to reach a balance between overfitting and underfitting.
 
 #### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
